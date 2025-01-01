@@ -1,0 +1,7 @@
+[theme]
+primaryColor = "#153D83"  # Adjust this for accent color
+backgroundColor = "#E6E6E6"
+secondaryBackgroundColor = "#F0F0F0"  # Optional for sidebar
+textColor = "#000000"  # Black text
+font = "sans serif"  # Default font
+headless = true
