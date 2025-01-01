@@ -18,6 +18,7 @@ class Main(BasePage):
         super().__init__(page_title, initial_sidebar_state=self.initial_sidebar_state)
     
     def draw(self, ):
+        st.markdown("**I did/am doing several things. <br>And in the meantime I update the blog**", unsafe_allow_html=True)
         self.draw_blogs_grid()
         
     def draw_blogs_grid(self, ):
