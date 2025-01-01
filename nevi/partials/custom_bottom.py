@@ -3,8 +3,6 @@ from streamlit_extras.bottom_container import bottom
 
 class Bottom:
     
-    @staticmethod
-    def draw():
+    def draw_bottom(self, ):
         with bottom():
-            buff, col, buff1 = st.columns([1, 5, 1])
-            buff1.write("Constructed with Streamlit and ❤️")
+            st.write(":material/copyright: Nevidomyy's blog. Powered with Streamlit & Render")

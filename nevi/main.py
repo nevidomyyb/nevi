@@ -1,21 +1,35 @@
-import streamlit as st
-from streamlit_extras.bottom_container import bottom
 from partials.custom_sidebar import Sidebar
-from partials.custom_bottom import Bottom
-
-st.set_page_config(
-    page_title="Nevidomyy's blog",
-    page_icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScFu4Gw8_z-p4d7njXvA8cT2KM2Qq7D7LDOZMjA13-sEFphgVR-A0tiG4gasGmGVStZck&usqp=CAU",
-    layout='wide',
-    initial_sidebar_state='expanded',
-)
-
-st.markdown("### Nevidomyy's blog")
-st.markdown("###### I made this.")
-
-Sidebar.draw()
-
-Bottom.draw()
+from streamlit_extras.grid import grid
+from streamlit_extras.switch_page_button import switch_page
+from partials.base_page import BasePage
+import streamlit as st
     
+class Main(BasePage):
     
+    def __init__(self, page_title):
+        self.page_title = page_title
+        self.initial_sidebar_state = 'expanded'
+        self.pages = [
+            {
+                "title": "Group Chat Data Analysis", "image": "https://placehold.co/300x200", "description": "Lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum, lorem ipsum.", "page": "wpp chat analysis"
+            },
+        ]
+        st.session_state['page'] = 'main'
+        super().__init__(page_title, initial_sidebar_state=self.initial_sidebar_state)
+    
+    def draw(self, ):
+        self.draw_blogs_grid()
+        
+    def draw_blogs_grid(self, ):
+        _grid = grid([0.25, 0.25, 0.25, 0.25])
+        for i in self.pages:
+            with _grid.container():
+                st.image(i['image'])
+                st.text(i['title'])
+                st.text(i['description'])
+                if st.button("Read"):
+                    switch_page(i['page'])
+        
 
+main = Main("Nevidomyy's blog")
+main.mount()
