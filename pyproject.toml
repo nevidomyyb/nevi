@@ -9,6 +9,9 @@ readme = "README.md"
 python = "^3.11"
 streamlit = "^1.41.1"
 streamlit-extras = "^0.5.0"
+streamlit-javascript = "^0.1.5"
+streamlit-option-menu = "^0.4.0"
+extra-streamlit-components = "^0.1.71"
 
 
 [build-system]
