@@ -4,6 +4,7 @@ from partials.base_page import BasePage
 import streamlit as st
 from streamlit_extras.stylable_container import stylable_container
 from utils.my_pages import pages
+from math import ceil
     
 class Main(BasePage):
     
@@ -20,37 +21,32 @@ class Main(BasePage):
         self.draw_blogs_grid()
         
     def draw_blogs_grid(self, ):
-        _grid = grid([0.25, 0.25, 0.25, 0.25])
-        # _grid = grid([1, 1, 1, 1])
-        for idx, page in enumerate(self.pages):
-            with _grid.container(border=True, height=380):
-                with stylable_container(
-                    key=f"stylable-contaier-grid-{idx}",
-                    css_styles=["""
-                        button {
-                            color: black;
-                        }
-                        """,
-                        """
-                        {
-                            # border: 1px solid rgba(49, 51, 63, 0.2);
-                            # border-radius: 0.5rem;
-                            # padding: calc(0.5em - 1px);
-                            # background-color: #E6E6E6;
-                            # height: 380px;
-                        }
-                        """
-                        ]
-                ):
-                    _, col1, _ = st.columns([0.2, 2, 0.2])
-                    
-                    col1.image(page['image'], use_container_width=True)
-                    col1.text(page['title'])
-                    col1.text(page['description'])
-                    buff1, col, buff = st.columns([1, 2, 1])
-                    with buff:
-                        if st.button(key=f"button-{idx}", label="Read", type='primary', use_container_width=True,):
-                            switch_page(page['page'])
+        
+        n_rows = ceil(len(self.pages) / 4)
+        page_idx = 0
+        for row in range(n_rows):
+            cols = st.columns(4)
+            for col in cols:
+                if page_idx < len(self.pages):
+                    page = self.pages[page_idx]
+                    with col.container(height=410):
+                        with stylable_container(
+                            key=f"abc{page_idx}",
+                            css_styles=[
+                                """
+                                    button {
+                                        color: black;
+                                    }
+                                """,
+                            ]
+                        ):
+                            st.image(page['image'], use_container_width=True)
+                            st.write(page['title'])
+                            st.write(page['description'])
+                            buff, buff, col = st.columns([1, 2, 1])
+                            if col.button(f"Read", key=f"button-{page_idx}", type='primary'):
+                                switch_page(page['page'])
+                    page_idx+=1
             
 
 main = Main("Nevidomyy's blog")
