@@ -11,7 +11,7 @@ class Main(BasePage):
     def __init__(self, page_title):
         self.page_title = page_title
         self.initial_sidebar_state = 'expanded'
-        self.pages = pages
+        self.pages = [page for page in pages if page['disabled'] == False]
 
         st.session_state['page'] = 'main'
         super().__init__(page_title, initial_sidebar_state=self.initial_sidebar_state)
