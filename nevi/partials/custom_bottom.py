@@ -5,4 +5,5 @@ class Bottom:
     
     def draw_bottom(self, ):
         with bottom():
-            st.write(":material/copyright: Nevidomyy's blog. Powered with Streamlit & Render")
+            
+            st.write(":material/copyright: Nevidomyy's blog. Powered with :red[Streamlit] & :orange[Cloudflare]")
